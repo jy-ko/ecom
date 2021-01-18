@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_18_123323) do
+ActiveRecord::Schema.define(version: 2021_01_18_144521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,11 @@ ActiveRecord::Schema.define(version: 2021_01_18_123323) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -61,6 +66,16 @@ ActiveRecord::Schema.define(version: 2021_01_18_123323) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "cart_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity", default: 1
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -73,6 +88,17 @@ ActiveRecord::Schema.define(version: 2021_01_18_123323) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["read_at"], name: "index_notifications_on_read_at"
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "price", precision: 5, scale: 2, default: "0.0"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.json "image"
+    t.string "category"
   end
 
   create_table "services", force: :cascade do |t|
@@ -107,5 +133,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_123323) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "products"
   add_foreign_key "services", "users"
 end

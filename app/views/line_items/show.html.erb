@@ -1,0 +1,18 @@
+<div class="page-header">
+  <%= link_to line_items_path, class: 'btn btn-default' do %>
+    All Line_items
+  <% end %>
+  <%= link_to edit_line_item_path(@line_item), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show line_item</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Product:</dt>
+  <dd><%= @line_item.product %></dd>
+
+  <dt>Cart:</dt>
+  <dd><%= @line_item.cart %></dd>
+
+</dl>
