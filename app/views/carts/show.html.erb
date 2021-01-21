@@ -1,12 +1,14 @@
-<div class="page-header">
-  <%= link_to carts_path, class: 'btn btn-default' do %>
-    All Carts
-  <% end %>
-  <%= link_to edit_cart_path(@cart), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show cart</h1>
-</div>
+<section>
+  <%= render(@cart.line_items) %>
 
-<dl class="dl-horizontal">
-</dl>
+  <div class="columns">
+    <div class="column">
+      <%= button_to 'Empty Cart', @cart, method: :delete, data: { confirm: "Are you sure?"}%>
+    </div>
+    <div class="column">
+      <h4>
+        <span>Total:</span><%= number_to_currency(@cart.total_price)%>
+      </h4>
+    </div>
+  </div>
+</section>

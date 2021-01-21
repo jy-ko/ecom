@@ -1,0 +1,12 @@
+<div>
+    <div><%= line_item.quantity %></div>
+    <div><%= image_tag(line_item.product.image_url(:thumb)) %></div>
+    <div>
+        <%= line_item.product.name %>
+        <div>
+            <%# <%= truncate(line_item.product.description), length: 140 %> 
+        </div>
+        <div>
+            <%= number_to_currency(line_item.total_price) %>
+        </div>
+</div>

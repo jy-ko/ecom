@@ -1,3 +1,4 @@
+
 // $navbar-default-bg: #312312;
 // $light-orange: #ff8c00;
 // $navbar-default-color: $light-orange;
@@ -7,7 +8,7 @@
 @import "bootstrap";
 @import "jumpstart/sticky-footer";
 @import "jumpstart/announcements";
-
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap');
 // Fixes bootstrap nav-brand container overlap
 @include media-breakpoint-down(xs) {
   .container {
@@ -20,3 +21,22 @@
 body > .alert {
   margin-bottom: 0;
 }
+
+body {
+  font-family: 'Bodoni Moda', serif;
+}
+// home: index
+
+.hero-image {
+  height: 90vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("hero.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 32px;
+}
+// .hero-text {
+//   color: white;
+//   position: absolute;
+//   top: 16%;
+// }
